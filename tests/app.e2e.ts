@@ -23,7 +23,9 @@ test("opens detail, switches sprites, favorites, and persists theme", async ({
     page.getByRole("button", { name: /remove bulbasaur from favorites/i })
   ).toBeVisible();
   await page.waitForTimeout(700);
-  await page.screenshot({ path: "docs/screenshots/pokemon-detail.png" });
+  if (process.env.UPDATE_SCREENSHOTS) {
+    await page.screenshot({ path: "docs/screenshots/pokemon-detail.png" });
+  }
 
   await page.getByRole("button", { name: /switch to dark theme/i }).click();
   await expect(page.locator("html")).toHaveClass(/dark/);
@@ -42,7 +44,9 @@ test("opens detail, switches sprites, favorites, and persists theme", async ({
   });
   await page.evaluate(() => scrollTo(0, 0));
   await page.waitForTimeout(700);
-  await page.screenshot({ path: "docs/screenshots/favorites.png" });
+  if (process.env.UPDATE_SCREENSHOTS) {
+    await page.screenshot({ path: "docs/screenshots/favorites.png" });
+  }
 });
 
 test("browses berry garden and berry details", async ({ page }) => {
@@ -54,7 +58,9 @@ test("browses berry garden and berry details", async ({ page }) => {
     page.getByRole("region", { name: "Berry results" }).locator("article")
   ).toHaveCount(64);
   await page.waitForTimeout(700);
-  await page.screenshot({ path: "docs/screenshots/berries.png" });
+  if (process.env.UPDATE_SCREENSHOTS) {
+    await page.screenshot({ path: "docs/screenshots/berries.png" });
+  }
   await page.getByRole("searchbox", { name: "Search berries" }).fill("oran");
   await expect(page.getByRole("heading", { name: "Oran" })).toBeVisible();
   await expect(
@@ -66,7 +72,9 @@ test("browses berry garden and berry details", async ({ page }) => {
   });
   await expect(page.getByText("Growth time")).toBeVisible();
   await page.waitForTimeout(700);
-  await page.screenshot({ path: "docs/screenshots/berry-detail.png" });
+  if (process.env.UPDATE_SCREENSHOTS) {
+    await page.screenshot({ path: "docs/screenshots/berry-detail.png" });
+  }
 });
 
 test("shows the custom not-found experience", async ({ page }) => {
@@ -75,5 +83,7 @@ test("shows the custom not-found experience", async ({ page }) => {
     page.getByRole("heading", { name: /wild page appeared/i })
   ).toBeVisible();
   await page.waitForTimeout(300);
-  await page.locator("main").screenshot({ path: "docs/screenshots/404.png" });
+  if (process.env.UPDATE_SCREENSHOTS) {
+    await page.locator("main").screenshot({ path: "docs/screenshots/404.png" });
+  }
 });

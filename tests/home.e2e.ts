@@ -7,7 +7,9 @@ test("searches, filters, and renders the Pokédex", async ({ page }) => {
   ).toBeVisible();
   await expect(page.locator(".pokemon-card")).toHaveCount(30);
   await expect(page.locator(".pokemon-card img").first()).toBeVisible();
-  await page.screenshot({ path: "docs/screenshots/home.png" });
+  if (process.env.UPDATE_SCREENSHOTS) {
+    await page.screenshot({ path: "docs/screenshots/home.png" });
+  }
 
   const search = page.getByRole("searchbox", {
     name: "Search Pokémon by name",
@@ -45,7 +47,9 @@ test("searches, filters, and renders the Pokédex", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Squirtle" })
   ).not.toBeVisible();
-  await page.screenshot({ path: "docs/screenshots/home-filtered.png" });
+  if (process.env.UPDATE_SCREENSHOTS) {
+    await page.screenshot({ path: "docs/screenshots/home-filtered.png" });
+  }
 
   await page.getByRole("button", { name: /clear/i }).click();
   await expect(page.getByRole("heading", { name: "Bulbasaur" })).toBeVisible();
