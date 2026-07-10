@@ -1,0 +1,14 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      run: npx oxlint {staged_files}
+    format:
+      run: npx oxfmt --check {staged_files}
+    typecheck:
+      run: npm run check
+
+pre-push:
+  commands:
+    test:
+      run: npm run test
