@@ -17,6 +17,8 @@ This was reproduced with:
 
 A direct system-Chrome screenshot was also a uniform background and logged `ContextResult::kTransientFailure: Failed to send GpuControl.CreateCommandBuffer`. In contrast, Playwright Chromium rendered every page, captured the committed screenshots, and completed all real user journeys. This isolates the limitation to Chrome/Lighthouse paint instrumentation in this environment rather than the application.
 
+After deployment, an external PageSpeed Insights API audit was also attempted against the public HTTPS URL, but the Google endpoint returned HTTP 429 (rate limited) before producing a report.
+
 ## Reproduce in a standard Chrome environment
 
 With the production preview running:
