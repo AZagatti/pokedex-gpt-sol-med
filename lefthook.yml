@@ -3,6 +3,7 @@ pre-commit:
   commands:
     lint:
       run: npx oxlint {staged_files}
+      glob: "*.{js,ts,svelte}"
     format:
       run: npx oxfmt --check {staged_files}
     typecheck:
